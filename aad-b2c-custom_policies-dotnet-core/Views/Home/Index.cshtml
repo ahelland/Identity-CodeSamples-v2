@@ -1,0 +1,56 @@
+﻿@using Microsoft.Extensions.Configuration;
+@inject IConfiguration configuration;
+@{
+    ViewData["Title"] = "Home Page";
+    ViewBag.msdomain = configuration.GetSection("AzureAdB2C")["Domain"];
+    ViewBag.b2cdomain = configuration.GetSection("AzureAdB2C")["B2CDomain"];
+    ViewBag.clientId = configuration.GetSection("AzureAdB2C")["ClientId"];    
+}
+
+<div class="text-center">    
+    <div class="row">
+        <p>
+            The links below will perform a signin or signin, but will redirect to jwt.ms afterwards due to nonce handling not being implemented for these links.(The AADB2C helper library requires nonces.)<br />
+            The menu items above will sign you into this web app as they use the AzureADB2C libraries to handle everything correctly.
+        </p>
+    </div>
+    <div class="row">        
+        <div class="col">
+            <hr />
+            <a class="btn btn-default" href="https://@ViewBag.b2cdomain/@ViewBag.msdomain/oauth2/v2.0/authorize?p=B2C_1A_Signup_Signin_Dev&client_id=@ViewBag.clientId&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login&domain_hint=commonaad">Partner Login - jwt.ms</a>
+        </div>
+        <div class="col">
+            <hr />
+            <a class="btn btn-default" href="https://@ViewBag.b2cdomain/@ViewBag.msdomain/oauth2/v2.0/authorize?p=B2C_1A_Signup_Signin_Dev&client_id=@ViewBag.clientId&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login&domain_hint=Contoso">Employee Login - jwt.ms</a>            
+        </div>
+        <div class="col">
+            <hr />
+            <a class="btn btn-default" href="https://@ViewBag.b2cdomain/@ViewBag.msdomain/oauth2/v2.0/authorize?p=B2C_1A_Signup_Signin_Dev&client_id=@ViewBag.clientId&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login&domain_hint=localAccount&login_hint=bob@contoso.com">Customer Login (bob@contoso.com) - jwt.ms</a>
+        </div>
+    </div>
+</div>
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <hr />
+    <p>Claims Present in the Claims Identity for @User.Identity.Name</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Claim Type</th>
+                <th scope="col">Claim Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in User.Claims)
+            {
+                <tr>
+                    <td>@claim.Type</td>
+                    <td>@claim.Value</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
