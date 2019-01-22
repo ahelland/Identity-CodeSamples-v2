@@ -1,0 +1,2 @@
+## aad-b2c-custom_policies-dotnet-core-linux - Build Status
+[![Build status](https://batprojects.visualstudio.com/IdentitySamples/_apis/build/status/aad-b2c-custom_policies-dotnet-core-linux)](https://batprojects.visualstudio.com/IdentitySamples/_build/latest?definitionId=20)
