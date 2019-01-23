@@ -1,5 +1,5 @@
 ## aad-b2c-custom_policies-dotnet-core-linux
-_Build Status:__  
+### Build Status:  
 [![Build status](https://batprojects.visualstudio.com/IdentitySamples/_apis/build/status/aad-b2c-custom_policies-dotnet-core-linux)](https://batprojects.visualstudio.com/IdentitySamples/_build/latest?definitionId=20)
 
 A ready-made Docker image can be found at: [https://hub.docker.com/r/ahelland/aad-b2c-custom_policies-dotnet-core-linux](https://hub.docker.com/r/ahelland/aad-b2c-custom_policies-dotnet-core-linux)
