@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<TrustFrameworkPolicy
+﻿<TrustFrameworkPolicy
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   xmlns="http://schemas.microsoft.com/online/cpim/schemas/2013/06"
@@ -29,7 +28,7 @@
       <ClaimType Id="socialIdpUserId">
         <DisplayName>Username</DisplayName>
         <DataType>string</DataType>
-        <UserHelpText/>
+        <UserHelpText />
         <UserInputType>TextBox</UserInputType>
         <Restriction>
           <Pattern RegularExpression="^[a-zA-Z0-9]+[a-zA-Z0-9_-]*$" HelpText="The username you provided is not valid. It must begin with an alphabet or number and can contain alphabets, numbers and the following symbols: _ -" />
@@ -62,7 +61,7 @@
       <ClaimType Id="signInName">
         <DisplayName>Sign in name</DisplayName>
         <DataType>string</DataType>
-        <UserHelpText/>
+        <UserHelpText />
         <UserInputType>TextBox</UserInputType>
       </ClaimType>
 
@@ -143,13 +142,13 @@
         <DefaultPartnerClaimTypes>
           <Protocol Name="OpenIdConnect" PartnerClaimType="sub" />
         </DefaultPartnerClaimTypes>
-        <UserHelpText/>
+        <UserHelpText />
       </ClaimType>
 
       <ClaimType Id="alternativeSecurityId">
         <DisplayName>AlternativeSecurityId</DisplayName>
         <DataType>string</DataType>
-        <UserHelpText/>
+        <UserHelpText />
       </ClaimType>
 
       <ClaimType Id="mailNickName">
@@ -166,7 +165,7 @@
           <Protocol Name="OpenIdConnect" PartnerClaimType="idp" />
           <Protocol Name="SAML2" PartnerClaimType="http://schemas.microsoft.com/identity/claims/identityprovider" />
         </DefaultPartnerClaimTypes>
-        <UserHelpText/>
+        <UserHelpText />
       </ClaimType>
 
       <ClaimType Id="displayName">
@@ -220,7 +219,7 @@
       <ClaimType Id="newUser">
         <DisplayName>User is new</DisplayName>
         <DataType>boolean</DataType>
-        <UserHelpText/>
+        <UserHelpText />
       </ClaimType>
 
       <ClaimType Id="executed-SelfAsserted-Input">
@@ -370,7 +369,8 @@
 
       <!-- This content definition is to render an error page that displays unhandled errors. -->
       <ContentDefinition Id="api.error">
-        <LoadUri>~/tenant/default/exception.cshtml</LoadUri>
+        <!--><LoadUri>~/tenant/default/exception.cshtml</LoadUri><-->
+        <LoadUri>~/tenant/templates/AzureBlue/exception.cshtml</LoadUri>
         <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
         <DataUri>urn:com:microsoft:aad:b2c:elements:contract:globalexception:1.1.0</DataUri>
         <Metadata>
@@ -379,7 +379,8 @@
       </ContentDefinition>
 
       <ContentDefinition Id="api.idpselections">
-        <LoadUri>~/tenant/default/idpSelector.cshtml</LoadUri>
+        <!--><LoadUri>~/tenant/default/idpSelector.cshtml</LoadUri><-->
+        <LoadUri>~/tenant/templates/AzureBlue/idpSelector.cshtml</LoadUri>
         <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
         <DataUri>urn:com:microsoft:aad:b2c:elements:contract:providerselection:1.0.0</DataUri>
         <Metadata>
@@ -389,7 +390,8 @@
       </ContentDefinition>
 
       <ContentDefinition Id="api.idpselections.signup">
-        <LoadUri>~/tenant/default/idpSelector.cshtml</LoadUri>
+        <!--><LoadUri>~/tenant/default/idpSelector.cshtml</LoadUri><-->
+        <LoadUri>~/tenant/templates/AzureBlue/idpSelector.cshtml</LoadUri>
         <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
         <DataUri>urn:com:microsoft:aad:b2c:elements:contract:providerselection:1.0.0</DataUri>
         <Metadata>
@@ -399,7 +401,8 @@
       </ContentDefinition>
 
       <ContentDefinition Id="api.signuporsignin">
-        <LoadUri>~/tenant/default/unified.cshtml</LoadUri>
+        <!--><LoadUri>~/tenant/default/unified.cshtml</LoadUri><-->
+        <LoadUri>~/tenant/templates/AzureBlue/unified.cshtml</LoadUri>
         <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
         <DataUri>urn:com:microsoft:aad:b2c:elements:contract:unifiedssp:1.0.0</DataUri>
         <Metadata>
@@ -408,7 +411,8 @@
       </ContentDefinition>
 
       <ContentDefinition Id="api.selfasserted">
-        <LoadUri>~/tenant/default/selfAsserted.cshtml</LoadUri>
+        <!--><LoadUri>~/tenant/default/selfAsserted.cshtml</LoadUri><-->
+        <LoadUri>~/tenant/templates/AzureBlue/selfAsserted.cshtml</LoadUri>
         <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
         <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:1.1.0</DataUri>
         <Metadata>
@@ -417,7 +421,8 @@
       </ContentDefinition>
 
       <ContentDefinition Id="api.selfasserted.profileupdate">
-        <LoadUri>~/tenant/default/updateProfile.cshtml</LoadUri>
+        <!--><LoadUri>~/tenant/default/updateProfile.cshtml</LoadUri><-->
+        <LoadUri>~/tenant/templates/AzureBlue/updateProfile.cshtml</LoadUri>
         <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
         <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:1.1.0</DataUri>
         <Metadata>
@@ -426,7 +431,8 @@
       </ContentDefinition>
 
       <ContentDefinition Id="api.localaccountsignup">
-        <LoadUri>~/tenant/default/selfAsserted.cshtml</LoadUri>
+        <!--><LoadUri>~/tenant/default/selfAsserted.cshtml</LoadUri><-->
+        <LoadUri>~/tenant/templates/AzureBlue/selfAsserted.cshtml</LoadUri>
         <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
         <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:1.1.0</DataUri>
         <Metadata>
@@ -435,7 +441,8 @@
       </ContentDefinition>
 
       <ContentDefinition Id="api.localaccountpasswordreset">
-        <LoadUri>~/tenant/default/selfAsserted.cshtml</LoadUri>
+        <!--><LoadUri>~/tenant/default/selfAsserted.cshtml</LoadUri><-->
+        <LoadUri>~/tenant/templates/AzureBlue/selfAsserted.cshtml</LoadUri>
         <RecoveryUri>~/common/default_page_error.html</RecoveryUri>
         <DataUri>urn:com:microsoft:aad:b2c:elements:contract:selfasserted:1.1.0</DataUri>
         <Metadata>
@@ -469,7 +476,6 @@
             <Item Key="AccessTokenEndpoint">https://graph.facebook.com/oauth/access_token</Item>
             <Item Key="HttpBinding">GET</Item>
             <Item Key="UsePolicyInRedirectUri">0</Item>
-
             <!-- The Facebook required HTTP GET method, but the access token response is in JSON format from 3/27/2017 -->
             <Item Key="AccessTokenResponseFormat">json</Item>
           </Metadata>
@@ -506,14 +512,12 @@
             <Item Key="UserMessageIfClaimsPrincipalDoesNotExist">We can't seem to find your account</Item>
             <Item Key="UserMessageIfInvalidPassword">Your password is incorrect</Item>
             <Item Key="UserMessageIfOldPasswordUsed">Looks like you used an old password</Item>
-
             <Item Key="ProviderName">https://sts.windows.net/</Item>
             <Item Key="METADATA">https://login.microsoftonline.com/{tenant}/.well-known/openid-configuration</Item>
             <Item Key="authorization_endpoint">https://login.microsoftonline.com/{tenant}/oauth2/token</Item>
             <Item Key="response_types">id_token</Item>
             <Item Key="response_mode">query</Item>
             <Item Key="scope">email openid</Item>
-
             <!-- Policy Engine Clients -->
             <Item Key="UsePolicyInRedirectUri">false</Item>
             <Item Key="HttpBinding">POST</Item>
@@ -581,7 +585,6 @@
             <PersistedClaim ClaimTypeReferenceId="userPrincipalName" />
             <PersistedClaim ClaimTypeReferenceId="mailNickName" DefaultValue="unknown" />
             <PersistedClaim ClaimTypeReferenceId="displayName" DefaultValue="unknown" />
-
             <!-- Optional claims -->
             <PersistedClaim ClaimTypeReferenceId="otherMails" />
             <PersistedClaim ClaimTypeReferenceId="givenName" />
@@ -609,9 +612,7 @@
           </InputClaims>
           <OutputClaims>
             <!-- Required claims -->
-
             <OutputClaim ClaimTypeReferenceId="objectId" />
-
             <!-- Optional claims -->
             <OutputClaim ClaimTypeReferenceId="userPrincipalName" />
             <OutputClaim ClaimTypeReferenceId="displayName" />
@@ -643,10 +644,9 @@
           <PersistedClaims>
             <!-- Required claims -->
             <PersistedClaim ClaimTypeReferenceId="email" PartnerClaimType="signInNames.emailAddress" />
-            <PersistedClaim ClaimTypeReferenceId="newPassword" PartnerClaimType="password"/>
+            <PersistedClaim ClaimTypeReferenceId="newPassword" PartnerClaimType="password" />
             <PersistedClaim ClaimTypeReferenceId="displayName" DefaultValue="unknown" />
             <PersistedClaim ClaimTypeReferenceId="passwordPolicies" DefaultValue="DisablePasswordExpiration" />
-
             <!-- Optional claims. -->
             <PersistedClaim ClaimTypeReferenceId="givenName" />
             <PersistedClaim ClaimTypeReferenceId="surname" />
@@ -676,7 +676,6 @@
             <!-- Required claims -->
             <OutputClaim ClaimTypeReferenceId="objectId" />
             <OutputClaim ClaimTypeReferenceId="authenticationSource" DefaultValue="localAccountAuthentication" />
-
             <!-- Optional claims -->
             <OutputClaim ClaimTypeReferenceId="userPrincipalName" />
             <OutputClaim ClaimTypeReferenceId="displayName" />
@@ -697,8 +696,7 @@
           </InputClaims>
           <PersistedClaims>
             <PersistedClaim ClaimTypeReferenceId="objectId" />
-            <PersistedClaim ClaimTypeReferenceId="newPassword" PartnerClaimType="password"/>
-
+            <PersistedClaim ClaimTypeReferenceId="newPassword" PartnerClaimType="password" />
           </PersistedClaims>
           <IncludeTechnicalProfile ReferenceId="AAD-Common" />
         </TechnicalProfile>
@@ -718,7 +716,6 @@
           <PersistedClaims>
             <!-- Required claims -->
             <PersistedClaim ClaimTypeReferenceId="objectId" />
-
             <!-- Optional claims -->
             <PersistedClaim ClaimTypeReferenceId="givenName" />
             <PersistedClaim ClaimTypeReferenceId="surname" />
@@ -738,7 +735,6 @@
             <InputClaim ClaimTypeReferenceId="objectId" Required="true" />
           </InputClaims>
           <OutputClaims>
-
             <!-- Optional claims -->
             <OutputClaim ClaimTypeReferenceId="signInNames.emailAddress" />
             <OutputClaim ClaimTypeReferenceId="displayName" />
@@ -805,11 +801,8 @@
           </Metadata>
           <IncludeInSso>false</IncludeInSso>
           <InputClaims>
-
             <InputClaim ClaimTypeReferenceId="alternativeSecurityId" />
-
             <InputClaim ClaimTypeReferenceId="userPrincipalName" />
-
             <!-- Optional claims. These claims are collected from the user and can be modified. Any claim added here should be updated in the
                  ValidationTechnicalProfile referenced below so it can be written to directory after being updateed by the user, i.e. AAD-UserWriteProfileUsingObjectId. -->
             <InputClaim ClaimTypeReferenceId="givenName" />
@@ -818,7 +811,6 @@
           <OutputClaims>
             <!-- Required claims -->
             <OutputClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" DefaultValue="true" />
-
             <!-- Optional claims. These claims are collected from the user and can be modified. Any claim added here should be updated in the
                  ValidationTechnicalProfile referenced below so it can be written to directory after being updateed by the user, i.e. AAD-UserWriteProfileUsingObjectId. -->
             <OutputClaim ClaimTypeReferenceId="givenName" />
@@ -885,7 +877,6 @@
             <OutputClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" DefaultValue="true" />
             <OutputClaim ClaimTypeReferenceId="authenticationSource" />
             <OutputClaim ClaimTypeReferenceId="newUser" />
-
             <!-- Optional claims, to be collected from the user -->
             <OutputClaim ClaimTypeReferenceId="displayName" />
             <OutputClaim ClaimTypeReferenceId="givenName" />
@@ -958,7 +949,6 @@
           </CryptographicKeys>
           <InputClaims>
             <InputClaim ClaimTypeReferenceId="objectId" />
-
           </InputClaims>
           <OutputClaims>
             <OutputClaim ClaimTypeReferenceId="newPassword" Required="true" />
@@ -992,7 +982,7 @@
             <PersistedClaim ClaimTypeReferenceId="executed-SelfAsserted-Input" />
           </PersistedClaims>
           <OutputClaims>
-            <OutputClaim ClaimTypeReferenceId="objectIdFromSession" DefaultValue="true"/>
+            <OutputClaim ClaimTypeReferenceId="objectIdFromSession" DefaultValue="true" />
           </OutputClaims>
         </TechnicalProfile>
 
@@ -1183,14 +1173,12 @@
             <ClaimsExchange Id="AADUserReadWithObjectId" TechnicalProfileReferenceId="AAD-UserReadUsingObjectId" />
           </ClaimsExchanges>
         </OrchestrationStep>
-
         <OrchestrationStep Order="5" Type="ClaimsExchange">
           <ClaimsExchanges>
             <ClaimsExchange Id="B2CUserProfileUpdateExchange" TechnicalProfileReferenceId="SelfAsserted-ProfileUpdate" />
           </ClaimsExchanges>
         </OrchestrationStep>
         <OrchestrationStep Order="6" Type="SendClaims" CpimIssuerTechnicalProfileReferenceId="JwtIssuer" />
-
       </OrchestrationSteps>
       <ClientDefinition ReferenceId="DefaultWeb" />
     </UserJourney>
