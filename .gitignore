@@ -259,3 +259,4 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+aad-b2c-custom_policies-dotnet-core/appsettings.Development.json
