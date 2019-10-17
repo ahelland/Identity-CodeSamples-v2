@@ -1,10 +1,10 @@
 # Linux base image
-FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-alpine AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM microsoft/dotnet:2.2-sdk AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0-alpine AS build
 WORKDIR /src
 COPY ["aad-b2c-custom_policies-dotnet-core/aad-b2c-custom_policies-dotnet-core.csproj", "aad-b2c-custom_policies-dotnet-core/"]
 RUN dotnet restore "aad-b2c-custom_policies-dotnet-core/aad-b2c-custom_policies-dotnet-core.csproj"
