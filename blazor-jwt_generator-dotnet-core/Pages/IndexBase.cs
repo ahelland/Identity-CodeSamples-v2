@@ -33,10 +33,10 @@ namespace blazor_jwt_generator_dotnet_core.Pages
             jwt = new Token
             {
                 Audience = aud,
-                IssuedAt = DateTime.Now.ToString(),
-                iat = DateTimeOffset.Now.ToUnixTimeSeconds().ToString(),
-                Expiration = DateTime.Now.AddMinutes(60).ToString(),
-                exp = DateTimeOffset.Now.AddMinutes(60).ToUnixTimeSeconds().ToString(),
+                IssuedAt = DateTime.UtcNow.ToString(),
+                iat = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(),
+                Expiration = DateTime.UtcNow.AddMinutes(60).ToString(),
+                exp = DateTimeOffset.UtcNow.AddMinutes(60).ToUnixTimeSeconds().ToString(),
                 Issuer = iss,
                 Subject = sub,
             };
