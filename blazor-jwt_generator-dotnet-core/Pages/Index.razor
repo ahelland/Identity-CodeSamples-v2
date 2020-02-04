@@ -28,7 +28,7 @@
     </div>
 
     <div class="form-group row">
-        <label for="IssuedAt" class="col-sm-4 col-form-label">Issued At</label>
+        <label for="IssuedAt" class="col-sm-4 col-form-label">Issued At (time in UTC)</label>
         <InputText id="IssuedAt" @bind-Value="@jwt.IssuedAt" class="form-control col-sm-4" placeholder="Issued At"></InputText>
         <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => jwt.IssuedAt)" />
     </div>
