@@ -66,7 +66,10 @@ namespace blazor_jwt_generator_dotnet_core.Models
 
             return new JwksKeyModel
             {
-                Kid = signingCredentials.Kid,
+                //In line with AAD convention kid == x5t == thumbprint:
+                Kid = thumbprint,
+                //To use "kid" as kid:
+                //Kid = signingCredentials.Kid,
                 Kty = "RSA",
                 Nbf = new DateTimeOffset(certificate.NotBefore).ToUnixTimeSeconds(),
                 Use = "sig",

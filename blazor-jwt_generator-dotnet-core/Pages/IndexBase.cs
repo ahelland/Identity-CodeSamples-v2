@@ -17,7 +17,7 @@ namespace blazor_jwt_generator_dotnet_core.Pages
         private static Lazy<X509SigningCredentials> SigningCredentials;
         protected string SigningCertThumbprint = string.Empty;
 
-        public static Token jwt { get; set; }
+        public static GenericToken jwt { get; set; }
         public string output = "";
 
         protected override void OnInitialized()
@@ -30,7 +30,7 @@ namespace blazor_jwt_generator_dotnet_core.Pages
 
             SigningCertThumbprint = configuration.GetSection("JWTSettings")["SigningCertThumbprint"];
 
-            jwt = new Token
+            jwt = new GenericToken
             {
                 Audience = aud,
                 IssuedAt = DateTime.UtcNow.ToString(),
