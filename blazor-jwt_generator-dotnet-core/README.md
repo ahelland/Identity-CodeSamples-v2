@@ -1,11 +1,13 @@
-﻿## blazor-jwt_generator-dotnet-core-linux
+﻿## blazor-jwt_generator-dotnet-core
 ### Build Status:  
 [![Build status](https://batprojects.visualstudio.com/IdentitySamples/_apis/build/status/blazor-jwt_generator-dotnet-core-linux)](https://batprojects.visualstudio.com/IdentitySamples/_build/latest?definitionId=26)
 
 A ready-made Docker image can be found at:  
 [https://hub.docker.com/r/ahelland/blazor-jwt_generator-dotnet-core-linux](https://hub.docker.com/r/ahelland/blazor-jwt_generator-dotnet-core-linux)
 
-This is a web app that generates proper JSON Web Tokens valid for testing purposes. (Since there is no authentication here you could say there is a substantial piece missing for actual security.) The token is generated using values input by the user (preseeded defaults supplied) and signs it with a certificate.
+This is a web app that generates proper JSON Web Tokens valid for testing purposes. (Since there is no authentication here you could say there is a substantial piece missing for actual security.) The token is generated using values input by the user (preseeded defaults supplied) and signed with a certificate.
+
+The app has templates for Azure AD and Azure AD B2C tokens in addition to a generic token not specific to any identity provider.
 
 ![JWT_Generator](Media/jwt_generator.png)
 
@@ -13,7 +15,7 @@ For validation purposes the app also exposes an OpenID Connect metadata endpoint
 
 The app runs on both Windows and Linux (and Docker-based variants of these), but since certificate handling is different between the two platforms the code branches based on setting the _HostEnvironment_ variable to "Windows" or "Linux".
 
-Windows:  
+#### Windows  
 For Windows it is assumed that the certificate is stored in the current user's certificate store.
 
 To generate (and store) a certificate use the following PowerShell commands: 
@@ -23,7 +25,7 @@ $cert = New-SelfSignedCertificate -Type Custom -Subject "CN=MySelfSignedCertific
 $cert.Thumbprint
 ```
 
-Linux:  
+#### Linux  
 For Linux it is assumed that the certificate is stored in _/var/ssl/private/{SigningCertThumbprint}.p12_  
 Technically it can be stored in any path you like, but this ensures compatibility with deploying to Azure App Service and having the certificate stored in Azure Key Vault.
 
@@ -40,6 +42,4 @@ For both operating systems set the thumbprint in the _SigningCertThumbprint_ set
 
 For more info on certificates:  
 [Use Key Vault references for App Service and Azure Functions](https://docs.microsoft.com/en-us/azure/app-service/app-service-key-vault-references)
-
-[Use an SSL certificate in your code in Azure App Service](
-https://docs.microsoft.com/en-us/azure/app-service/configure-ssl-certificate-in-code)
+[Use an SSL certificate in your code in Azure App Service](https://docs.microsoft.com/en-us/azure/app-service/configure-ssl-certificate-in-code)
