@@ -63,5 +63,16 @@ namespace B2CNETCoreWebApp.Controllers
 
             return this.Challenge(magic_link_auth, magic_link_policy);
         }
+
+        //Separate SignUp handler for invitation links sent by email
+        public IActionResult SignUpInvitation(string id_token_hint)
+        {
+            var invite_auth = new AuthenticationProperties { RedirectUri = "/" };
+            invite_auth.Items.Add("id_token_hint", id_token_hint);
+
+            string invite_policy = Configuration.GetSection("AzureAdB2C")["InvitationPolicyId"];
+
+            return this.Challenge(invite_auth, invite_policy);
+        }
     }
 }

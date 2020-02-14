@@ -34,11 +34,15 @@ namespace aad_b2c_custom_policies_dotnet_core
 
             //"Regular" AAD B2C policies
             services.AddAuthentication(AzureADB2CDefaults.AuthenticationScheme)
-                .AddAzureADB2C(options => Configuration.Bind("AzureADB2C", options));
+                .AddAzureADB2C(options => Configuration.Bind("AzureADB2C", options)).AddCookie();
 
             //Magic link auth
             string magic_link_policy = Configuration.GetSection("AzureAdB2C")["MagicLinkPolicyId"];
-            services.AddAuthentication(options => options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme).AddOpenIdConnect(magic_link_policy, GetOpenIdSignUpOptions(magic_link_policy)).AddCookie();
+            services.AddAuthentication(options => options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme).AddOpenIdConnect(magic_link_policy, GetOpenIdSignUpOptions(magic_link_policy));
+
+            //Invitation link SignUp
+            string invite_policy = Configuration.GetSection("AzureAdB2C")["InvitationPolicyId"];
+            services.AddAuthentication(options => options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme).AddOpenIdConnect(invite_policy, GetOpenIdSignUpOptions(invite_policy));            
 
             services.AddAuthorization(options =>
             {
@@ -91,13 +95,20 @@ namespace aad_b2c_custom_policies_dotnet_core
                 string clientId = Configuration.GetSection("AzureAdB2C")["ClientId"];
                 string B2CDomain = Configuration.GetSection("AzureAdB2C")["B2CDomain"];
                 string Domain = Configuration.GetSection("AzureAdB2C")["Domain"];
-
+                string MagicLink = Configuration.GetSection("AzureAdB2C")["MagicLinkPolicyId"];
+                string Invite = Configuration.GetSection("AzureAdB2C")["InvitationPolicyId"];
 
                 options.MetadataAddress = $"https://{B2CDomain}/{Domain}/{policy}/v2.0/.well-known/openid-configuration";
                 options.ClientId = clientId;
                 options.ResponseType = OpenIdConnectResponseType.IdToken;
                 options.SignedOutCallbackPath = "/signout/" + policy;
-                options.CallbackPath = "/signin-oidc-link";
+                
+                if (policy == MagicLink)
+                    options.CallbackPath = "/signin-oidc-link";
+
+                if (policy == Invite)
+                    options.CallbackPath = "/signin-oidc-invite";
+
                 options.SignedOutRedirectUri = "/";
                 options.SignInScheme = "AzureADB2C";
                 options.Events = new OpenIdConnectEvents
