@@ -1,0 +1,43 @@
+﻿@page "/MagicLink"
+@inherits SignInLinkBase
+
+<div class="alert alert-info" role="alert">
+    Fill in the details below a click the button. The rest of it is, well... magic :)
+</div>
+
+<EditForm Model="@mailer" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group row">
+        <label for="toName" class="col-sm-4 col-form-label">Recipient name</label>
+        <InputText id="toName" @bind-Value="@mailer.to.Name" class="form-control col-sm-4" placeholder="Recipient name"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => mailer.to.Name)" />
+    </div>
+    <div class="form-group row">
+        <label for="toEmail" class="col-sm-4 col-form-label">Recipient email</label>
+        <InputText id="toEmail" @bind-Value="@mailer.to.Email" class="form-control col-sm-4" placeholder="Recipient email"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => mailer.to.Email)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="fromName" class="col-sm-4 col-form-label">Sender name</label>
+        <InputText id="fromName" @bind-Value="@mailer.from.Name" class="form-control col-sm-4" placeholder="Sender name"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => mailer.from.Name)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="fromEmail" class="col-sm-4 col-form-label">Sender email</label>
+        <InputText id="fromEmail" @bind-Value="@mailer.from.Email" class="form-control col-sm-4" placeholder="Sender email"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => mailer.from.Email)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="subject" class="col-sm-4 col-form-label">Subject</label>
+        <InputText id="subject" @bind-Value="@mailer.subject" class="form-control col-sm-4" placeholder="Subject"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => mailer.subject)" />
+    </div>
+
+</EditForm>
+
+<button class="btn btn-primary" @onclick="@SendSignInLinkAsync">Send link</button>

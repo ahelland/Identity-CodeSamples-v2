@@ -12,6 +12,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aad-b2c-custom_policies-dot
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "blazor-jwt_generator-dotnet-core", "blazor-jwt_generator-dotnet-core\blazor-jwt_generator-dotnet-core.csproj", "{1026FB13-EE24-4E2D-94BF-8ACF3C46D1B1}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aad-b2c-mailengine-dotnet-core", "aad-b2c-mailengine-dotnet-core\aad-b2c-mailengine-dotnet-core.csproj", "{61A8F11F-9047-4AC4-B926-A92DD56BC3D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{1026FB13-EE24-4E2D-94BF-8ACF3C46D1B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1026FB13-EE24-4E2D-94BF-8ACF3C46D1B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1026FB13-EE24-4E2D-94BF-8ACF3C46D1B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61A8F11F-9047-4AC4-B926-A92DD56BC3D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61A8F11F-9047-4AC4-B926-A92DD56BC3D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61A8F11F-9047-4AC4-B926-A92DD56BC3D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61A8F11F-9047-4AC4-B926-A92DD56BC3D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
