@@ -14,4 +14,13 @@
     <PackageReference Include="Sendgrid" Version="9.12.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="SignInTemplate.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SignUpTemplate.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
