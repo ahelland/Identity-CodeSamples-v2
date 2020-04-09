@@ -109,20 +109,20 @@
         "kid": "@SigningCertHash",
         "typ": "JWT"
         }.{
-        "ver": @jwt.Version.,
-        "iss": "@jwt.Issuer,
+        "ver": "@jwt.Version",
+        "iss": "@jwt.Issuer",
         "sub": "@jwt.sub",
-        "aud": "@jwt.Audience"
+        "aud": "@jwt.Audience",
         "exp": @(((DateTimeOffset)DateTime.Parse(jwt.Expiration)).ToUnixTimeSeconds()),
         "iat": @(((DateTimeOffset)DateTime.Parse(jwt.IssuedAt)).ToUnixTimeSeconds()),
         "nbf": @(((DateTimeOffset)DateTime.Parse(jwt.NotBefore)).ToUnixTimeSeconds()),
         "auth_time": @(((DateTimeOffset)DateTime.Parse(jwt.auth_time)).ToUnixTimeSeconds()),
-        "name": @jwt.name,
-        "family_name": @jwt.family_name,
-        "given_name": @jwt.given_name,
-        "idp": @jwt.idp,
-        "acr": @jwt.acr,
-        "nonce": @jwt.nonce,
+        "name": "@jwt.name",
+        "family_name": "@jwt.family_name",
+        "given_name": "@jwt.given_name",
+        "idp": "@jwt.idp",
+        "acr": "@jwt.acr",
+        "nonce": "@jwt.nonce"
         }
     </code>    
 </pre>

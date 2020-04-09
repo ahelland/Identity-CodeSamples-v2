@@ -55,11 +55,11 @@
         "x5t": "placeholder",
         "typ": "JWT"
         }.{
-        "iss": "@jwt.Issuer,
+        "iss": "@jwt.Issuer",
         "aud": "@jwt.Audience"
         "sub": "@jwt.Subject",
         "nbf": @(((DateTimeOffset)DateTime.Parse(jwt.IssuedAt)).ToUnixTimeSeconds()),
-        "exp": @(((DateTimeOffset)DateTime.Parse(jwt.Expiration)).ToUnixTimeSeconds()),
+        "exp": @(((DateTimeOffset)DateTime.Parse(jwt.Expiration)).ToUnixTimeSeconds())
         }
     </code>    
 </pre>
