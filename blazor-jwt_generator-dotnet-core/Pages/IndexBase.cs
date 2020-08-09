@@ -42,7 +42,7 @@ namespace blazor_jwt_generator_dotnet_core.Pages
             };
 
             //One way to handle Windows-based certs
-            if (host.ToLower() == "windows")
+            if (Environment.OSVersion.Platform.ToString() == "Win32NT")
             {
                 SigningCredentials = new Lazy<X509SigningCredentials>(() =>
                 {
@@ -63,7 +63,7 @@ namespace blazor_jwt_generator_dotnet_core.Pages
             }
 
             //And another way to handle Linux certs
-            if (host.ToLower() == "linux")
+            if (Environment.OSVersion.Platform.ToString() == "Unix")
             {
                 var bytes = System.IO.File.ReadAllBytes($"/var/ssl/private/{SigningCertThumbprint}.p12");                
                 var cert = new X509Certificate2(bytes);
