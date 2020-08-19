@@ -1,0 +1,93 @@
+﻿@page "/"
+@inherits IndexBase
+@using Newtonsoft.Json.Linq;
+
+<div class="alert alert-info" role="alert">
+    Fill in the properties below, and hit the "Validate JWT" button. <br />
+    Issuer will by default use what's in the metadata, and the attribute below only applies when a metadata address is not supplied. <br />
+    Signature will only be checked if a metadata address is supplied. <br />
+    Audience is not inferred from the metadata (as this is app specific) so this must always be supplied manually.
+</div>
+
+<EditForm Model="@jwt" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group row">
+        <label for="MetadataAddress" class="col-sm-4 col-form-label">Metadata address. (Something like https://foo/.well-known/openid-configuration)</label>
+        <InputText id="MetadataAddress" @bind-Value="@jwt.MetadataAddress" class="form-control col-sm-4" placeholder="Metadata Address"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => jwt.MetadataAddress)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="Issuer" class="col-sm-4 col-form-label">Issuer (the identity provider issuing the token).</label>
+        <InputText id="issuer" @bind-Value="@jwt.Issuer" class="form-control col-sm-4" placeholder="Issuer"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => jwt.Issuer)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="Audience" class="col-sm-4 col-form-label">Audience (who the token is intended for).</label>
+        <InputText id="Audience" @bind-Value="@jwt.Audience" class="form-control col-sm-4" placeholder="Audience"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => jwt.Audience)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="Base64Token" class="col-sm-4 col-form-label">Base64-encoded version of token.</label>
+        <textarea rows="10" id="Base64Token" @bind="@jwt.Base64Token" class="form-control col-sm-4" placeholder="Base64 Token"></textarea>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => jwt.Base64Token)" />
+    </div>
+
+</EditForm>
+
+<div class="alert alert-info" role="alert">
+    Validation result
+</div>
+<hr />
+
+<code>
+    Checking JWT: @FormatStatus <br />
+    Loading Metadata: @MetadataStatus <br />
+    @{ 
+        if (output != null)
+        {
+            output = output.Replace(Environment.NewLine,"<br />");
+        }
+    }
+
+    Validation: @((MarkupString)output) <br />
+    <b>Decoded token</b> <br />    
+
+    @{
+        //Do some pretty-printing
+        if (token != null)
+        {
+            var headers = token.Header;
+            jwtHeader = "{";
+            foreach (var h in headers)
+            {
+                jwtHeader += '"' + h.Key + '"' + ":" + '"' + h.Value + '"' + ",";
+            }
+            jwtHeader += "}";
+            jwtHeader = JToken.Parse(jwtHeader).ToString(Newtonsoft.Json.Formatting.Indented);
+            jwtHeader = jwtHeader.Replace(Environment.NewLine, "<br />");
+
+            var claims = token.Payload;
+            jwtPayload = "{";
+            foreach (var c in claims)
+            {
+                jwtPayload += '"' + c.Key + '"' + ":" + '"' + c.Value + '"' + ",";
+            }
+            jwtPayload += "}";
+            jwtPayload = JToken.Parse(jwtPayload).ToString(Newtonsoft.Json.Formatting.Indented);
+            jwtPayload = jwtPayload.Replace(Environment.NewLine, "<br />");
+        }
+    }
+
+    Header: <br /> @((MarkupString)jwtHeader) <br />
+    Payload: <br /> @((MarkupString)jwtPayload) <br />
+    Signature: <br /> @jwtSignature <br />
+</code>
+
+<hr />
+
+<button class="btn btn-primary" @onclick="@ValidateJWTAsync">Validate JWT</button>

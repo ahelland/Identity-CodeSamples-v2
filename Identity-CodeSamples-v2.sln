@@ -14,6 +14,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "blazor-jwt_generator-dotnet
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "aad-b2c-mailengine-dotnet-core", "aad-b2c-mailengine-dotnet-core\aad-b2c-mailengine-dotnet-core.csproj", "{61A8F11F-9047-4AC4-B926-A92DD56BC3D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "blazor_jwt_validator_dotnet_core", "blazor_jwt_validator_dotnet_core\blazor_jwt_validator_dotnet_core.csproj", "{FCDECFFB-2531-4F95-B6C1-759B06B931DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{61A8F11F-9047-4AC4-B926-A92DD56BC3D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61A8F11F-9047-4AC4-B926-A92DD56BC3D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61A8F11F-9047-4AC4-B926-A92DD56BC3D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCDECFFB-2531-4F95-B6C1-759B06B931DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCDECFFB-2531-4F95-B6C1-759B06B931DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCDECFFB-2531-4F95-B6C1-759B06B931DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCDECFFB-2531-4F95-B6C1-759B06B931DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
