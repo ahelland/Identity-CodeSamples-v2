@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using System;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Microsoft.Identity.Web;
+using Microsoft.Identity.Web.UI;
 
 namespace aad_b2c_custom_policies_dotnet_core
 {
@@ -33,8 +33,12 @@ namespace aad_b2c_custom_policies_dotnet_core
             });
 
             //"Regular" AAD B2C policies
-            services.AddAuthentication(AzureADB2CDefaults.AuthenticationScheme)
-                .AddAzureADB2C(options => Configuration.Bind("AzureADB2C", options)).AddCookie();
+            //services.AddAuthentication(AzureADB2CDefaults.AuthenticationScheme)
+            //    .AddAzureADB2C(options => Configuration.Bind("AzureADB2C", options)).AddCookie();
+            services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+                .AddMicrosoftIdentityWebApp(Configuration.GetSection("AzureADB2C"));
+
+            
 
             //Magic link auth
             string magic_link_policy = Configuration.GetSection("AzureAdB2C")["MagicLinkPolicyId"];
@@ -51,7 +55,7 @@ namespace aad_b2c_custom_policies_dotnet_core
                 options.AddPolicy("Employee", policy => policy.RequireClaim("Role", "Employee"));                
             });
 
-            services.AddRazorPages();          
+            services.AddRazorPages().AddMicrosoftIdentityUI();          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

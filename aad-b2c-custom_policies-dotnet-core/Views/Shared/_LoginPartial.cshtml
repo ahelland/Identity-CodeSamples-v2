@@ -1,9 +1,9 @@
-﻿@using Microsoft.AspNetCore.Authentication.AzureADB2C.UI
-@using Microsoft.Extensions.Options
-@inject IOptionsMonitor<AzureADB2COptions> AzureADB2COptions
+﻿@using Microsoft.Extensions.Options
+@using Microsoft.Identity.Web
+@inject IOptions<MicrosoftIdentityOptions> AzureADB2COptions
 
-@{
-    var options = AzureADB2COptions.Get(AzureADB2CDefaults.AuthenticationScheme);    
+@{    
+    var options = AzureADB2COptions.Value;
 }
 
 <ul class="navbar-nav">
@@ -24,13 +24,13 @@
             </li>
         }
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="AzureADB2C" asp-controller="Account" asp-action="SignOut">Sign out</a>
+            <a class="nav-link text-dark" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignOut">Sign out</a>
         </li>
     }
     else
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="AzureADB2C" asp-controller="Account" asp-action="SignIn">Sign in</a>
+            <a class="nav-link text-dark" asp-area="MicrosoftIdentity" asp-controller="Account" asp-action="SignIn">Sign in</a>
         </li>
     }
 </ul>
