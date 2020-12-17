@@ -1,10 +1,10 @@
 # Linux base image
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine AS base
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-alpine AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine AS build
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-alpine AS build
 WORKDIR /src
 COPY ["blazor_jwt_validator_dotnet_core/blazor_jwt_validator_dotnet_core.csproj", "blazor_jwt_validator_dotnet_core/"]
 RUN dotnet restore "blazor_jwt_validator_dotnet_core/blazor_jwt_validator_dotnet_core.csproj"
