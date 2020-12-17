@@ -14,8 +14,8 @@ namespace blazor_jwt_validator_dotnet_core.Pages
     public class IndexBase : ComponentBase
     {
         [Inject]
-        protected IConfiguration configuration { get; set; }        
-        public static EncodedToken jwt { get; set; }
+        protected IConfiguration Configuration { get; set; }        
+        public static EncodedToken Jwt { get; set; }
         public string FormatStatus = "N/A";
         public string MetadataStatus = "N/A";
         public string output = "N/A";
@@ -26,7 +26,7 @@ namespace blazor_jwt_validator_dotnet_core.Pages
 
         protected override void OnInitialized()
         {
-            jwt = new EncodedToken
+            Jwt = new EncodedToken
             {
                 MetadataAddress = String.Empty,
                 Base64Token = String.Empty,
@@ -45,7 +45,7 @@ namespace blazor_jwt_validator_dotnet_core.Pages
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
 
             //Check if readable token (string is in a JWT format)
-            var readableToken = handler.CanReadToken(jwt.Base64Token);
+            var readableToken = handler.CanReadToken(Jwt.Base64Token);
             if (readableToken != true)
             {
                 FormatStatus = "The token doesn't seem to be in a proper JWT format.";
@@ -62,7 +62,7 @@ namespace blazor_jwt_validator_dotnet_core.Pages
             bool metadataAvailable;
             try
             {
-                configurationManager = new ConfigurationManager<OpenIdConnectConfiguration>(jwt.MetadataAddress, new OpenIdConnectConfigurationRetriever());
+                configurationManager = new ConfigurationManager<OpenIdConnectConfiguration>(Jwt.MetadataAddress, new OpenIdConnectConfigurationRetriever());
                 openIdConfig = configurationManager.GetConfigurationAsync(CancellationToken.None).Result;
                 metadataAvailable = true;
                 MetadataStatus = $"Successfully loaded metadata.";
@@ -81,8 +81,8 @@ namespace blazor_jwt_validator_dotnet_core.Pages
                 validationParameters =
                     new TokenValidationParameters
                     {
-                        ValidIssuer = jwt.Issuer,
-                        ValidAudience = jwt.Audience,
+                        ValidIssuer = Jwt.Issuer,
+                        ValidAudience = Jwt.Audience,
                         ValidateLifetime = true,
                         ValidateAudience = true,
                         ValidateIssuer = true,
@@ -103,7 +103,7 @@ namespace blazor_jwt_validator_dotnet_core.Pages
                     new TokenValidationParameters
                     {
                         ValidIssuer = openIdConfig.Issuer,
-                        ValidAudience = jwt.Audience,
+                        ValidAudience = Jwt.Audience,
                         ValidateLifetime = true,                        
                         ValidateIssuerSigningKey = true,   
                         ValidateAudience = true,
@@ -112,11 +112,10 @@ namespace blazor_jwt_validator_dotnet_core.Pages
                     };
             }
 
-            token = handler.ReadJwtToken(jwt.Base64Token);
+            token = handler.ReadJwtToken(Jwt.Base64Token);
             try
             {
-                SecurityToken validatedToken;                
-                var identity = handler.ValidateToken(jwt.Base64Token, validationParameters, out validatedToken);
+                var identity = handler.ValidateToken(Jwt.Base64Token, validationParameters, out SecurityToken validatedToken);
                 if (metadataAvailable)
                 {
                     output += "Token is valid according to metadata!";
@@ -133,7 +132,7 @@ namespace blazor_jwt_validator_dotnet_core.Pages
             {
                 //Due to a bug in the AAD IdentityModel extension we need custom handling to print out the attributes in the error message.
                 var customMessage = string.Empty;
-
+                
                 if (e.Message.Contains("IDX10223"))
                 {
                     customMessage = $"Time values not valid. Current time: {DateTime.UtcNow.ToShortDateString()} {DateTime.UtcNow.ToLongTimeString()}. Token valid from: '{token.ValidFrom.ToShortDateString()} {token.ValidFrom.ToLongTimeString()}' Token valid to: '{token.ValidTo.ToShortDateString()} {token.ValidTo.ToLongTimeString()}'";
@@ -146,21 +145,25 @@ namespace blazor_jwt_validator_dotnet_core.Pages
                 {
                     customMessage = $"Incorrect Issuer. Accepted issuer '{validationParameters.ValidateIssuer}'. Issuer in token '{token.Issuer}.'";
                 }
-                //Sginature fail
-                if (e.Message.Contains("IDX10501"))
+                //Unable to obtain metadata
+                if (e.Message.Contains("IDX20803"))
                 {
-                    customMessage = e.Message;
+                    customMessage = $"Unable to obtain configuration.";
+                }
+                //Signature fail
+                if (e.Message.Contains("IDX10501"))
+                {                    
+                    customMessage = $"Signature validation failed. Unable to match key: {token.Header.Kid}";
                 }
                 //Signature fail
                 if (e.Message.Contains("IDX10508"))
                 {
-                    customMessage = e.Message;
+                    customMessage = "Signature validation failed. Signature is improperly formatted.";
                 }
                 else if (customMessage == string.Empty)
                 {
                     customMessage = e.Message;
-                }
-
+                }                
                 output += $"Token failed to validate. {Environment.NewLine}{customMessage}";
             }            
         }
