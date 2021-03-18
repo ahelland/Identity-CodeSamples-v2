@@ -1,5 +1,5 @@
 ﻿# Linux base image
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine AS build-env
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-alpine AS base
 WORKDIR /app
  
 # Copy csproj and restore as distinct layers
