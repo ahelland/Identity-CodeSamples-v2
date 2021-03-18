@@ -4,7 +4,7 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/aspnet:5.0-alpine AS base
+FROM mcr.microsoft.com/dotnet/sdk:5.0-alpine AS base
 WORKDIR /src
 COPY ["aad-b2c-mailengine-dotnet-core/aad-b2c-mailengine-dotnet-core.csproj", "aad-b2c-mailengine-dotnet-core/"]
 RUN dotnet restore "aad-b2c-mailengine-dotnet-core/aad-b2c-mailengine-dotnet-core.csproj"
