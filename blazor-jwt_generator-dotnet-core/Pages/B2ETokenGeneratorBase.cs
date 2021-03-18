@@ -114,16 +114,18 @@ namespace blazor_jwt_generator_dotnet_core.Pages
             string issuer = jwt.Issuer;
             string audience = jwt.Audience;
 
-            IList<System.Security.Claims.Claim> claims = new List<System.Security.Claims.Claim>();
-            claims.Add(new System.Security.Claims.Claim("ver", jwt.Version, System.Security.Claims.ClaimValueTypes.String, issuer));
-            claims.Add(new System.Security.Claims.Claim("sub", Subject, System.Security.Claims.ClaimValueTypes.String, issuer));            
-            claims.Add(new System.Security.Claims.Claim("iat", jwt.iat, System.Security.Claims.ClaimValueTypes.String, issuer));
-            claims.Add(new System.Security.Claims.Claim("name", jwt.name, System.Security.Claims.ClaimValueTypes.String, issuer));
-            claims.Add(new System.Security.Claims.Claim("preferred_username", jwt.preferred_username, System.Security.Claims.ClaimValueTypes.String, issuer));            
-            claims.Add(new System.Security.Claims.Claim("oid", jwt.oid, System.Security.Claims.ClaimValueTypes.String, issuer));
-            claims.Add(new System.Security.Claims.Claim("tid", jwt.tid, System.Security.Claims.ClaimValueTypes.String, issuer));
-            claims.Add(new System.Security.Claims.Claim("nonce", jwt.nonce, System.Security.Claims.ClaimValueTypes.String, issuer));
-            claims.Add(new System.Security.Claims.Claim("aio", jwt.aio, System.Security.Claims.ClaimValueTypes.String, issuer));
+            IList<System.Security.Claims.Claim> claims = new List<System.Security.Claims.Claim>
+            {
+                new System.Security.Claims.Claim("ver", jwt.Version, System.Security.Claims.ClaimValueTypes.String, issuer),
+                new System.Security.Claims.Claim("sub", Subject, System.Security.Claims.ClaimValueTypes.String, issuer),
+                new System.Security.Claims.Claim("iat", jwt.iat, System.Security.Claims.ClaimValueTypes.String, issuer),
+                new System.Security.Claims.Claim("name", jwt.name, System.Security.Claims.ClaimValueTypes.String, issuer),
+                new System.Security.Claims.Claim("preferred_username", jwt.preferred_username, System.Security.Claims.ClaimValueTypes.String, issuer),
+                new System.Security.Claims.Claim("oid", jwt.oid, System.Security.Claims.ClaimValueTypes.String, issuer),
+                new System.Security.Claims.Claim("tid", jwt.tid, System.Security.Claims.ClaimValueTypes.String, issuer),
+                new System.Security.Claims.Claim("nonce", jwt.nonce, System.Security.Claims.ClaimValueTypes.String, issuer),
+                new System.Security.Claims.Claim("aio", jwt.aio, System.Security.Claims.ClaimValueTypes.String, issuer)
+            };
 
             // Create the token
             JwtSecurityToken token = new JwtSecurityToken(

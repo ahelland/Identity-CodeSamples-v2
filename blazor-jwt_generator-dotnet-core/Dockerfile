@@ -1,10 +1,10 @@
 # Linux base image
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine AS base
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-alpine AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine AS build
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-alpine AS build
 WORKDIR /src
 COPY ["blazor-jwt_generator-dotnet-core/blazor-jwt_generator-dotnet-core.csproj", "blazor-jwt_generator-dotnet-core/"]
 RUN dotnet restore "blazor-jwt_generator-dotnet-core/blazor-jwt_generator-dotnet-core.csproj"

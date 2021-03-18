@@ -116,17 +116,19 @@ namespace blazor_jwt_generator_dotnet_core.Pages
             string issuer = jwt.Issuer;
             string audience = jwt.Audience;
 
-            IList<System.Security.Claims.Claim> claims = new List<System.Security.Claims.Claim>();
-            claims.Add(new System.Security.Claims.Claim("ver", jwt.Version, System.Security.Claims.ClaimValueTypes.String, issuer));
-            claims.Add(new System.Security.Claims.Claim("sub", Subject, System.Security.Claims.ClaimValueTypes.String, issuer));
-            claims.Add(new System.Security.Claims.Claim("iat", jwt.iat, System.Security.Claims.ClaimValueTypes.String, issuer));
-            claims.Add(new System.Security.Claims.Claim("name", jwt.name, System.Security.Claims.ClaimValueTypes.String, issuer));
-            claims.Add(new System.Security.Claims.Claim("given_name", jwt.given_name, System.Security.Claims.ClaimValueTypes.String, issuer));
-            claims.Add(new System.Security.Claims.Claim("family_name", jwt.family_name, System.Security.Claims.ClaimValueTypes.String, issuer));
-            claims.Add(new System.Security.Claims.Claim("idp", jwt.idp, System.Security.Claims.ClaimValueTypes.String, issuer));
-            claims.Add(new System.Security.Claims.Claim("auth_time", jwt.auth_time, System.Security.Claims.ClaimValueTypes.String, issuer));
-            claims.Add(new System.Security.Claims.Claim("nonce", jwt.nonce, System.Security.Claims.ClaimValueTypes.String, issuer));
-            claims.Add(new System.Security.Claims.Claim("acr", jwt.acr, System.Security.Claims.ClaimValueTypes.String, issuer));
+            IList<System.Security.Claims.Claim> claims = new List<System.Security.Claims.Claim>
+            {
+                new System.Security.Claims.Claim("ver", jwt.Version, System.Security.Claims.ClaimValueTypes.String, issuer),
+                new System.Security.Claims.Claim("sub", Subject, System.Security.Claims.ClaimValueTypes.String, issuer),
+                new System.Security.Claims.Claim("iat", jwt.iat, System.Security.Claims.ClaimValueTypes.String, issuer),
+                new System.Security.Claims.Claim("name", jwt.name, System.Security.Claims.ClaimValueTypes.String, issuer),
+                new System.Security.Claims.Claim("given_name", jwt.given_name, System.Security.Claims.ClaimValueTypes.String, issuer),
+                new System.Security.Claims.Claim("family_name", jwt.family_name, System.Security.Claims.ClaimValueTypes.String, issuer),
+                new System.Security.Claims.Claim("idp", jwt.idp, System.Security.Claims.ClaimValueTypes.String, issuer),
+                new System.Security.Claims.Claim("auth_time", jwt.auth_time, System.Security.Claims.ClaimValueTypes.String, issuer),
+                new System.Security.Claims.Claim("nonce", jwt.nonce, System.Security.Claims.ClaimValueTypes.String, issuer),
+                new System.Security.Claims.Claim("acr", jwt.acr, System.Security.Claims.ClaimValueTypes.String, issuer)
+            };
 
 
             // Create the token

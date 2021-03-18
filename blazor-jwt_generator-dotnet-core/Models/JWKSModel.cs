@@ -53,7 +53,7 @@ namespace blazor_jwt_generator_dotnet_core.Models
             string thumbprint = Base64UrlEncoder.Encode(certificate.GetCertHash());
 
             // JWK must have the modulus and exponent explicitly defined
-            RSA rsa = certificate.GetRSAPublicKey() as RSA; ;
+            var rsa = certificate.GetRSAPublicKey(); ;
 
             if (rsa == null)
             {

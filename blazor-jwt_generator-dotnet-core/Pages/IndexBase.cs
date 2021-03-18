@@ -93,10 +93,12 @@ namespace blazor_jwt_generator_dotnet_core.Pages
         public static string BuildIdToken(string Email)
         {            
             string issuer = jwt.Issuer;
-            string audience = jwt.Audience;            
-            
-            IList<System.Security.Claims.Claim> claims = new List<System.Security.Claims.Claim>();
-            claims.Add(new System.Security.Claims.Claim("sub", Email, System.Security.Claims.ClaimValueTypes.String, issuer));
+            string audience = jwt.Audience;
+
+            IList<System.Security.Claims.Claim> claims = new List<System.Security.Claims.Claim>
+            {
+                new System.Security.Claims.Claim("sub", Email, System.Security.Claims.ClaimValueTypes.String, issuer)
+            };
 
             // Create the token
             JwtSecurityToken token = new JwtSecurityToken(
