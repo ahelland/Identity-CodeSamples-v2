@@ -19,16 +19,17 @@ on:
     paths:
       - 'blazor_jwt_validator_dotnet_core/**'
 
+  workflow_dispatch:
+  
 defaults:
   run:
-    working-directory: blazor_jwt_validator_dotnet_core
+    working-directory: ./blazor_jwt_validator_dotnet_core
 
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
-
 
 jobs:
   build:
