@@ -3,11 +3,11 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
 WORKDIR /app
  
 # Copy csproj and restore as distinct layers
-COPY *.csproj ./
+COPY ./blazor_jwt_validator_dotnet_core/*.csproj ./
 RUN dotnet restore
  
 # Copy everything else and build
-COPY . ./
+COPY ./blazor_jwt_validator_dotnet_core ./
 RUN dotnet publish -c Release -o out
  
 # Build runtime image
