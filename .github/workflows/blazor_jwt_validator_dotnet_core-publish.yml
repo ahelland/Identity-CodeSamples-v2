@@ -1,4 +1,4 @@
-name: Docker
+name: jwt-validator
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
@@ -6,8 +6,9 @@ name: Docker
 # documentation.
 
 on:
-  schedule:
-    - cron: '15 3 * * *'
+  # Disable nightly builds
+  #schedule:
+  #  - cron: '15 3 * * *'
   push:
     branches: [ master ]
     # Publish semver tags as releases.
@@ -76,4 +77,5 @@ jobs:
           file: ./blazor_jwt_validator_dotnet_core/Dockerfile.CI
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
+           #${{ env.IMAGE_NAME }}:latest          
           labels: ${{ steps.meta.outputs.labels }}                    
