@@ -14,17 +14,17 @@ on:
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
     paths:
-      - 'blazor_jwt_validator_dotnet_core/**'
+      - 'blazor_jwt_validator_dotnet6/**'
   pull_request:
     branches: [ master ]
     paths:
-      - 'blazor_jwt_validator_dotnet_core/**'
+      - 'blazor_jwt_validator_dotnet6/**'
 
   workflow_dispatch:
   
 defaults:
   run:
-    working-directory: ./blazor_jwt_validator_dotnet_core
+    working-directory: ./blazor_jwt_validator_dotnet6
 
 env:
   # Use docker.io for Docker Hub if empty
@@ -48,7 +48,7 @@ jobs:
       - name: Install dotnet
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '5.0.x' # SDK Version to use.        
+          dotnet-version: '6.0.x' # SDK Version to use.        
         
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
@@ -73,8 +73,8 @@ jobs:
       - name: Build and push Docker image        
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc        
         with:
-          context: ./blazor_jwt_validator_dotnet_core
-          file: ./blazor_jwt_validator_dotnet_core/Dockerfile.CI
+          context: ./blazor_jwt_validator_dotnet6
+          file: ./blazor_jwt_validator_dotnet6/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
            #${{ env.IMAGE_NAME }}:latest          
