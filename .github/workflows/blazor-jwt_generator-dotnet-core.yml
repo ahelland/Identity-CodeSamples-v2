@@ -6,8 +6,9 @@ name: Jwt-Generator
 # documentation.
 
 on:
-  schedule:
-    - cron: '36 2 * * *'
+  # Disable nightly builds
+  #schedule:
+  #  - cron: '36 2 * * *'
   push:
     branches: [ master ]
     # Publish semver tags as releases.
