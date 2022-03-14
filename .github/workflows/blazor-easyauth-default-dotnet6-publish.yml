@@ -65,6 +65,5 @@ jobs:
           context: ./blazor-easyauth-default-dotnet6
           file: ./blazor-easyauth-default-dotnet6/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
-                ${{ env.IMAGE_NAME }}:latest          
+          tags: ${{ env.IMAGE_NAME }}:latest          
           labels: ${{ steps.meta.outputs.labels }}                    
