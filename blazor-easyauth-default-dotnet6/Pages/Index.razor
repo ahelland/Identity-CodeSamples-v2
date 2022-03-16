@@ -1,9 +1,52 @@
-﻿@page "/"
+﻿@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+<h2>Claims</h2>
 
-Welcome to your new app.
+<button @onclick="GetClaims">Get claims of currently logged in user.</button>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@if (claims.Count() > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Claim Type</th>
+                <th scope="col">Claim Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in claims)
+            {
+                <tr>
+                    <td>@claim.Type</td>
+                    <td>@claim.Value</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    //For handling the claims in the session
+    private string authStatusMsg = string.Empty;
+    private IEnumerable<Claim> claims = Enumerable.Empty<Claim>();         
+    
+    private async Task GetClaims()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            authStatusMsg = $"{user.Identity.Name} has been authenticated.";
+            claims = user.Claims;
+        }
+        else
+        {
+            authStatusMsg = $"User has not been authenticated.";
+        }
+    }
+}
