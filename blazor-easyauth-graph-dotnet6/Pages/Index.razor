@@ -1,0 +1,26 @@
+﻿@page "/"
+@using Microsoft.Graph
+@using Microsoft.AspNetCore.Authorization
+@inject GraphServiceClient GraphClient
+
+<PageTitle>Index</PageTitle>
+
+<h2>Claims</h2>
+
+@if (graphUser != null)
+{
+    <p>Hello @graphUser.DisplayName, it looks like your phone number is @graphUser.MobilePhone</p>
+}
+
+<p>
+    You should be seeing your name and mobile phone number above if the call to MS Graph worked. (Mobile phone only works if it is defined on the user object.)
+</p>
+
+@code {
+    protected User graphUser;     
+
+    protected override async Task OnInitializedAsync()
+    {
+        graphUser = await GraphClient.Me.Request().GetAsync();            
+    }    
+}
