@@ -1,0 +1,141 @@
+﻿@page "/B2C"
+@inherits B2CTokenGeneratorBase
+
+<div class="alert alert-info" role="alert">
+    Fill in the properties below, and hit the "Generate JWT" button below.<br />
+    Part of the value with AAD B2C tokens is that they are highly customizable as to what claims you want so this sample is really just a minimal JWT.
+</div>
+
+<EditForm Model="@jwt" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group row">
+        <label for="Version" class="col-sm-4 col-form-label">Version (of the Azure AD endpoint)</label>
+        <InputText id="Version" @bind-Value="@jwt.Version" class="form-control col-sm-4" placeholder="Version"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => jwt.Version)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="Issuer" class="col-sm-4 col-form-label">Issuer (the identity provider issuing the token)</label>
+        <InputText id="issuer" @bind-Value="@jwt.Issuer" class="form-control col-sm-4" placeholder="Issuer"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => jwt.Issuer)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="Audience" class="col-sm-4 col-form-label">Audience (who the token is intended for)</label>
+        <InputText id="Audience" @bind-Value="@jwt.Audience" class="form-control col-sm-4" placeholder="Audience"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => jwt.Audience)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="Subject" class="col-sm-4 col-form-label">sub (pairwise unique id for entity + appid)</label>
+        <InputText id="Subject" @bind-Value="@jwt.sub" class="form-control col-sm-4" placeholder="Subject"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => jwt.sub)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="IssuedAt" class="col-sm-4 col-form-label">Issued At (current time in UTC)</label>
+        <InputText id="IssuedAt" @bind-Value="@jwt.IssuedAt" class="form-control col-sm-4" placeholder="Issued At"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => jwt.IssuedAt)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="NotBefore" class="col-sm-4 col-form-label">Not before (current time in UTC)</label>
+        <InputText id="NotBefore" @bind-Value="@jwt.NotBefore" class="form-control col-sm-4" placeholder="Not before"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => jwt.NotBefore)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="auth_time" class="col-sm-4 col-form-label">auth_time (current time in UTC)</label>
+        <InputText id="auth_time" @bind-Value="@jwt.auth_time" class="form-control col-sm-4" placeholder="Expiration"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => jwt.auth_time)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="Expiration" class="col-sm-4 col-form-label">Expiration (by default 60 minutes after issuance)</label>
+        <InputText id="Expiration" @bind-Value="@jwt.Expiration" class="form-control col-sm-4" placeholder="Expiration"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => jwt.Expiration)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="name" class="col-sm-4 col-form-label">name (of entity token is issued to)</label>
+        <InputText id="name" @bind-Value="@jwt.name" class="form-control col-sm-4" placeholder="Name"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => jwt.name)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="given_name" class="col-sm-4 col-form-label">given_name</label>
+        <InputText id="given_name" @bind-Value="@jwt.given_name" class="form-control col-sm-4" placeholder="Preferred username"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => jwt.given_name)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="family_name" class="col-sm-4 col-form-label">family_name</label>
+        <InputText id="family_name" @bind-Value="@jwt.family_name" class="form-control col-sm-4" placeholder="oid"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => jwt.family_name)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="acr" class="col-sm-4 col-form-label">acr (name of B2C policy/user journey)</label>
+        <InputText id="acr" @bind-Value="@jwt.acr" class="form-control col-sm-4" placeholder="tid"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => jwt.acr)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="nonce" class="col-sm-4 col-form-label">nonce (parameter in request to the IdP for response validation)</label>
+        <InputText id="nonce" @bind-Value="@jwt.nonce" class="form-control col-sm-4" placeholder="Nonce"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => jwt.nonce)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="idp" class="col-sm-4 col-form-label">idp (identity provider)</label>
+        <InputText id="idp" @bind-Value="@jwt.idp" class="form-control col-sm-4" placeholder="aio"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => jwt.idp)" />
+    </div>
+
+</EditForm>
+
+<hr />
+<div class="alert alert-info" role="alert">
+    A JSON representation of what the deserialized token will look like (not the actual token since this text is pre-generated).<br />
+    The token will be signed with a certificate as defined in appsettings.json.
+</div>
+<hr />
+<pre>
+    <code>
+        {
+        "alg": "RS256",
+        "kid": "@SigningCertHash",
+        "typ": "JWT"
+        }.{
+        "ver": "@jwt.Version",
+        "iss": "@jwt.Issuer",
+        "sub": "@jwt.sub",
+        "aud": "@jwt.Audience",
+        "exp": @(((DateTimeOffset)DateTime.Parse(jwt.Expiration)).ToUnixTimeSeconds()),
+        "iat": @(((DateTimeOffset)DateTime.Parse(jwt.IssuedAt)).ToUnixTimeSeconds()),
+        "nbf": @(((DateTimeOffset)DateTime.Parse(jwt.NotBefore)).ToUnixTimeSeconds()),
+        "auth_time": @(((DateTimeOffset)DateTime.Parse(jwt.auth_time)).ToUnixTimeSeconds()),
+        "name": "@jwt.name",
+        "family_name": "@jwt.family_name",
+        "given_name": "@jwt.given_name",
+        "idp": "@jwt.idp",
+        "acr": "@jwt.acr",
+        "nonce": "@jwt.nonce"
+        }
+    </code>    
+</pre>
+<hr />
+
+<div class="alert alert-info" role="alert">
+    Generated token
+</div>
+<hr />
+<code>
+    @output
+</code>
+
+<hr />
+
+<button class="btn btn-primary" @onclick="@GenerateJWT">Generate JWT</button>
