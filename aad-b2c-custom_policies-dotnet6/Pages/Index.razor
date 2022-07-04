@@ -1,0 +1,110 @@
+﻿@page "/"
+@inherits IndexBase
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Components.Authorization
+@using aad_b2c_custom_policies_dotnet6.Models
+@inject AuthenticationStateProvider AuthenticationStateProvider;
+
+<PageTitle>Index</PageTitle>
+
+<EditForm Model="@parameters" OnValidSubmit="@HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group row">
+        <label for="loginHint" class="col-sm-4 col-form-label">loginHint</label>
+        <InputText id="loginHint" @bind-Value="@parameters.loginHint" class="form-control col-sm-4" placeholder="bob@contoso.com"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => parameters.loginHint)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="domainHint" class="col-sm-4 col-form-label">domainHint</label>
+        <InputText id="domainHint" @bind-Value="@parameters.domainHint" class="form-control col-sm-4" placeholder="facebook.com"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => parameters.domainHint)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="locale" class="col-sm-4 col-form-label">locale</label>
+        <InputText id="locale" @bind-Value="@parameters.locale" class="form-control col-sm-4" placeholder="en-us"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => parameters.locale)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="customParamKey" class="col-sm-4 col-form-label">Custom parameter key</label>
+        <InputText id="customParamKey" @bind-Value="@parameters.customParamKey" class="form-control col-sm-4" placeholder="foo"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => parameters.customParamKey)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="customParamValue" class="col-sm-4 col-form-label">Custom parameter value</label>
+        <InputText id="customParamValue" @bind-Value="@parameters.customParamValue" class="form-control col-sm-4" placeholder="bar"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => parameters.customParamValue)" />
+    </div>
+
+    <div class="form-group row">
+        <label for="policy" class="col-sm-4 col-form-label">B2C Policy</label>
+        <InputText id="policy" @bind-Value="@parameters.policy" class="form-control col-sm-4" placeholder="B2C_1A_Policy"></InputText>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => parameters.policy)" />
+    </div>
+
+      <div class="form-group row">
+        <label for="tokenHint" class="col-sm-4 col-form-label">tokenHint</label>
+        <textarea id="tokenHint" @bind="@parameters.tokenHint" class="form-control col-sm-4" placeholder="ey..."></textarea>
+        <ValidationMessage class="offset-sm-3 col-sm-8" For="@(() => parameters.tokenHint)" />
+    </div>
+
+</EditForm>
+
+<hr />
+
+<button class="btn btn-primary" @onclick="GenerateUrl">Generate url</button> <br />
+
+<label class="col-sm-4 col-form-label">Url passed to Redirect context <b>@url</b></label><br />
+<a href="@url" class="btn btn-primary">Log in</a>
+
+<hr />
+<button class="btn btn-primary" @onclick="GetClaims">Get claims of currently logged in user.</button>
+<br />
+
+@if (claims.Count() > 0)
+{
+    <h2>Claims</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Claim Type</th>
+                <th scope="col">Claim Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in claims)
+            {
+                <tr>
+                    <td>@claim.Type</td>
+                    <td>@claim.Value</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code
+{    
+    protected IEnumerable<Claim> claims = Enumerable.Empty<Claim>();
+
+    protected async Task GetClaims()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        
+        if (user.Identity.IsAuthenticated)
+        {   
+            claims = user.Claims;
+        }
+        else
+        {
+            //Do nothing
+        }
+        
+    }
+}

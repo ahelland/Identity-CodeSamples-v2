@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32602.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aad-b2c-custom_policies-dotnet6", "aad-b2c-custom_policies-dotnet6.csproj", "{827742C4-3C9D-4374-BA09-70303D0372D2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{827742C4-3C9D-4374-BA09-70303D0372D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{827742C4-3C9D-4374-BA09-70303D0372D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{827742C4-3C9D-4374-BA09-70303D0372D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{827742C4-3C9D-4374-BA09-70303D0372D2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6A4D5E4F-62E0-4501-864E-08C53561C166}
+	EndGlobalSection
+EndGlobal
