@@ -4,7 +4,6 @@ using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 
-
 namespace blazor_jwt_validator_dotnet10.Pages
 {
     public class IndexBase : ComponentBase
