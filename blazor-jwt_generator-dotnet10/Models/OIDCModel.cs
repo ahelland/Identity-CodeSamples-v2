@@ -1,4 +1,6 @@
-﻿namespace blazor_jwt_generator_dotnet10.Models
+﻿using Newtonsoft.Json;
+
+namespace blazor_jwt_generator_dotnet10.Models
 {
     public class OIDCModel
     {

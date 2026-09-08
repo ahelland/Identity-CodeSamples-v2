@@ -1,10 +1,10 @@
-﻿using Azure.Identity;
+﻿using Microsoft.AspNetCore.Mvc;
+using Azure.Identity;
 using Azure.Security.KeyVault.Secrets;
 using blazor_jwt_generator_dotnet10.Models;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace blazor_jwt_generator_dotnet10.Controllers 
@@ -21,7 +21,7 @@ namespace blazor_jwt_generator_dotnet10.Controllers
             configuration = config;
         }
 
-        [Route(".well-known/openid-configuration")]
+        [Microsoft.AspNetCore.Mvc.Route(".well-known/openid-configuration")]
         public ActionResult Metadata()
         {
             return Content(JsonConvert.SerializeObject(new OIDCModel
@@ -34,7 +34,7 @@ namespace blazor_jwt_generator_dotnet10.Controllers
             }), "application/json"); ;
         }
 
-        [Route(".well-known/keys", Name = "JWKS")]
+        [Microsoft.AspNetCore.Mvc.Route(".well-known/keys", Name = "JWKS")]
         public ActionResult JwksDocument()
         {
             var SigningCertThumbprint = configuration.GetSection("JWTSettings")["SigningCertThumbprint"] ?? string.Empty;

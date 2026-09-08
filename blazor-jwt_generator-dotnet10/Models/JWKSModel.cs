@@ -1,5 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using Newtonsoft.Json;
+using Microsoft.IdentityModel.Tokens;
 
 namespace blazor_jwt_generator_dotnet10.Models
 {
