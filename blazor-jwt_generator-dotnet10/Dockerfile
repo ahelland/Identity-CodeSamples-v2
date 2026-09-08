@@ -2,21 +2,20 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 8080
 
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
-COPY ["blazor-jwt_generator-dotnet10.csproj", "."]
-RUN dotnet restore "./blazor-jwt_generator-dotnet10.csproj"
+COPY ["blazor_jwt_generator_dotnet10.csproj", "./"]
+RUN dotnet restore "./blazor_jwt_generator_dotnet10.csproj"
 COPY . .
-WORKDIR "/src/."
-RUN dotnet build "blazor-jwt_generator-dotnet10.csproj" -c Release -o /app/build
+
+RUN dotnet build "blazor_jwt_generator_dotnet10.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "blazor-jwt_generator-dotnet10.csproj" -c Release -o /app/publish
+RUN dotnet publish "blazor_jwt_generator_dotnet10.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "blazor-jwt_generator-dotnet10.dll"]
+ENTRYPOINT ["dotnet", "blazor_jwt_generator_dotnet10.dll"]
