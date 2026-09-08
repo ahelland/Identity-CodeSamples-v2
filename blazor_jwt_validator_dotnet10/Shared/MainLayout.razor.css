@@ -1,0 +1,37 @@
+.top-row {
+    justify-content: space-between;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+    .top-row ::deep a, .top-row .btn-link {
+        white-space: nowrap;
+        margin-left: 1.5rem;
+    }
+
+    .top-row a:first-child {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+@media (max-width: 640.98px) {
+    .top-row:not(.auth) {
+        display: none;
+    }
+
+    .top-row.auth {
+        justify-content: space-between;
+    }
+
+    .top-row a, .top-row .btn-link {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 641px) {
+    .top-row {
+        padding-left: 2rem;
+        padding-right: 1.5rem;
+    }
+}
