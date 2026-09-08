@@ -21,7 +21,9 @@
   <ItemGroup>
     <Using Include="Microsoft.AspNetCore.Mvc" />
     <Using Include="Microsoft.AspNetCore.Mvc.RazorPages" />
-    <Using Include="Microsoft.AspNetCore.Components" />    
+    <Using Include="Microsoft.AspNetCore.Components" />
+    <Using Include="blazor_jwt_validator_dotnet10.Models" />
+    <Using Include="blazor_jwt_validator_dotnet10.Data" /> 
   </ItemGroup>
 
 </Project>
