@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Protocols;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Microsoft.IdentityModel.Tokens;
+
 
 namespace blazor_jwt_validator_dotnet10.Pages
 {
