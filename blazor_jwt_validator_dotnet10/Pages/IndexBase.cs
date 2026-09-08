@@ -1,4 +1,6 @@
-﻿namespace blazor_jwt_validator_dotnet10.Pages
+﻿using Microsoft.AspNetCore.Components;
+
+namespace blazor_jwt_validator_dotnet10.Pages
 {
     public class IndexBase : ComponentBase
     {
